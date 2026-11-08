@@ -26,6 +26,8 @@ const std::unordered_map<int, ModelInfo> kModelInfoMap = {
     
     {17011, {"R11s",       "OPPO R11s"}},
     {17021, {"R11sPlus",   "OPPO R11s Plus"}},
+
+    {18321, {"RMX1801",    "Realme 2 Pro"}},
 };
 
 /*
@@ -84,6 +86,10 @@ void vendor_load_properties() {
 
     if (read_file(prj_file, prj_version, sizeof(prj_version))) {
         auto model_info = kModelInfoMap.find(atoi(prj_version));
+        if (model_info == kModelInfoMap.end()) {
+            LOG(ERROR) << "Unknown OPPO project: " << prj_version;
+            return;
+        }
 
         SetupModelProperties(model_info->second);
     }

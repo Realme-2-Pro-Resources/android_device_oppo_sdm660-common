@@ -111,9 +111,11 @@ PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/gps/,$(TARGET_COPY_OUT_VENDOR)/etc)
 
 # Gatekeeper
+ifneq ($(TARGET_USES_QTI_KEYMASTER),true)
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl \
     android.hardware.gatekeeper@1.0-service
+endif
 
 # Healthd
 PRODUCT_PACKAGES += \
@@ -133,9 +135,11 @@ PRODUCT_COPY_FILES += \
 $(call soong_config_set,libinit,vendor_init_lib,//$(LOCAL_PATH):libinit_oppo_sdm660)
 
 # Keymaster
+ifneq ($(TARGET_USES_QTI_KEYMASTER),true)
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
+endif
 
 # Lights
 PRODUCT_PACKAGES += \
